@@ -45,7 +45,7 @@ def eval_model(args):
         input_batch=[]
         input_image_batch=[]
         count=i
-        image_folder=[]     
+        image_folder=[]
         batch_end = min(i + args.batch_size, len(questions))
 
              

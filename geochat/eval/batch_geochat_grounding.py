@@ -52,6 +52,7 @@ def eval_model(args):
              
         for j in range(i,batch_end):
             image_file=questions[j]['image_id']+'.png'
+            qs=questions[j]['question']
 
             if questions[j]['type']=='ref':
                 qs="[refer] Give me the location of <p> " + qs+" </p>"

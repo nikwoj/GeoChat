@@ -34,7 +34,15 @@ def evaluation_metrics(data_path):
     print('Acc:',(correct/(correct+incorrect)))
 
 
-            
+def split_list(lst, n):
+    """Split a list into n (roughly) equal-sized chunks"""
+    chunk_size = math.ceil(len(lst) / n)  # integer division
+    return [lst[i:i+chunk_size] for i in range(0, len(lst), chunk_size)]
+
+
+def get_chunk(lst, n, k):
+    chunks = split_list(lst, n)
+    return chunks[k]
 
 def eval_model(args):
     # Model
@@ -44,6 +52,9 @@ def eval_model(args):
     tokenizer, model, image_processor, context_len = load_pretrained_model(args.model_path, args.model_base, model_name)
     # print(model)
     questions=[]
+    # import pdb; pdb.set_trace()
+    import vsi.tools.vdb_ipdb as vdb
+    vdb.dbstop_if_error()
     questions = [json.loads(q) for q in open(os.path.expanduser(args.question_file), "r")]
 
     questions = get_chunk(questions, args.num_chunks, args.chunk_idx)
